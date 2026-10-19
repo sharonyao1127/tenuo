@@ -15,9 +15,7 @@ def test_testing_recipe_functions_execute():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
 
-    module.test_allowed_record_executes_with_real_authorization()
-    module.test_denied_record_does_not_enter_function_body()
-    module.test_missing_capability_uses_stable_error_code()
-    module.test_direct_warrant_assertions_cover_allowed_and_denied_args()
-    module.test_child_grant_can_narrow_but_cannot_widen_scope()
-    module.test_deterministic_headers_are_stable_for_regression_snapshots()
+    names = sorted(name for name in dir(module) if name.startswith("test_"))
+    assert names
+    for name in names:
+        getattr(module, name)()
